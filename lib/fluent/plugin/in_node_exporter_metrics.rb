@@ -108,15 +108,21 @@ module Fluent
       end
 
       def refresh_watchers
+        p $log
         begin
           @serde = CMetrics::Serde.new
           @collectors.each do |collector|
             begin
               collector.run
               collector.cmetrics.each do |key, cmetric|
+                p "BEFORE CONCAT"
+                p cmetric
                 @serde.concat(cmetric) if cmetric
+                p "AFTER CONCAT"
               end
             rescue => e
+              p "RESCUE"
+              p e.message
               $log.error(e.message)
             end
           end
