@@ -79,6 +79,7 @@ module Fluent
             @scaling_frequency_max_hertz.set(File.read(scaling_max_freq_path).to_f, [cpu_id])
             @scaling_frequency_min_hertz.set(File.read(scaling_min_freq_path).to_f, [cpu_id])
           end
+          p cmetrics
         end
 
         def cmetrics
