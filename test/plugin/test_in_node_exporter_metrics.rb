@@ -188,6 +188,7 @@ class NodeExporterMetricsInputTest < Test::Unit::TestCase
         params["cpufreq"] = true
         d = create_driver(config_element("ROOT", "", params))
         d.run(expect_records: 1, timeout: 2)
+        p d.events
         cmetrics = MessagePack.unpack(d.events.first.last["cmetrics"])
         value_counts = if File.exist?("/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq")
                          [Etc.nprocessors] * 6
