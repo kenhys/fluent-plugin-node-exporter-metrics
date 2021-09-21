@@ -64,6 +64,10 @@ module Fluent
         def cpufreq_update
           scan_sysfs_path("devices/system/cpu/cpu[0-9]*").each do |path|
             cpuinfo_cur_freq_path = File.join(path, "cpufreq", "cpuinfo_cur_freq")
+
+            unless Dir.exist?(File.join(path, "cpufreq"))
+              p "404 #{File.join(path, 'cpufreq')}"
+            end
             cpuinfo_max_freq_path = File.join(path, "cpufreq", "cpuinfo_max_freq")
             cpuinfo_min_freq_path = File.join(path, "cpufreq", "cpuinfo_min_freq")
             scaling_cur_freq_path = File.join(path, "cpufreq", "scaling_cur_freq")
