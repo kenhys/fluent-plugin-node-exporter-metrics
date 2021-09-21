@@ -108,7 +108,6 @@ module Fluent
       end
 
       def refresh_watchers
-        p $log
         begin
           @serde = CMetrics::Serde.new
           @collectors.each do |collector|
